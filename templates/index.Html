@@ -10,22 +10,35 @@
    
         <p>
             <label for="txtn1">Digite primeiro número :</label>
-            <input type="number" name="in1" id="txtn1" required autocomplete="cc-number">
+            <input type="number" name="in1" id="txtn1" required  oninput="Media()">
         </p>
    
         <p>
             <label for="txtn2">Digite Outro número :</label>
-            <input type="number" name="in2" id="txtn1" required autocomplete="cc-number">
+            <input type="number" name="in2" id="txtn1" required  oninput="Media()">
         </p>
-       <p>
-        <label for="output">Resultado = </label>
+      <p>
+        <label for="output">Resuladp :</label>
         <output name="" for="output"></output>
-       </p>
+      </p>
        <p>
-        <input type="submit" value="Enviar " onclick="Media()">
+       <input type="button" value="Enviar" id="output" oninput="Media()">
         <input type="reset" value="Voltar">
        </p>
-       <script src="static.script.js"></script>
+       <script>
+        function Media(){
+            var n1=window.document.getElementById("txtn1");
+            
+            var n2=window.document.getElementById("txtn2");
+            var valor1=Number(n1.value);
+            var valor2=Number(n2.value);
+            var Res= valor1/valor2;
+            output.innerHTML=Res
+           
+            
+        
+        }
+       </script>
    
 
 </body>
