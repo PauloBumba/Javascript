@@ -1,45 +1,62 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interatividade</title>
-   
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora de Valor de Viagem</title>
 </head>
 <body>
-   
-        <p>
-            <label for="txtn1">Digite primeiro número :</label>
-            <input type="number" name="in1" id="txtn1" required  oninput="Media()">
-        </p>
-   
-        <p>
-            <label for="txtn2">Digite Outro número :</label>
-            <input type="number" name="in2" id="txtn1" required  oninput="Media()">
-        </p>
-      <p>
-        <label for="output">Resuladp :</label>
-        <output name="" for="output"></output>
-      </p>
-       <p>
-       <input type="button" value="Enviar" id="output" oninput="Media()">
-        <input type="reset" value="Voltar">
-       </p>
-       <script>
-        function Media(){
-            var n1=window.document.getElementById("txtn1");
-            
-            var n2=window.document.getElementById("txtn2");
-            var valor1=Number(n1.value);
-            var valor2=Number(n2.value);
-            var Res= valor1/valor2;
-            output.innerHTML=Res
-           
-            
-        
-        }
-       </script>
-   
+
+<h1>Calculadora de Valor de Viagem</h1>
+
+<form id="formViagem">
+  <label for="distancia">Distância percorrida (km):</label>
+  <input type="number" id="distancia" name="distancia" required><br><br>
+
+  <button type="button" id="botaoCalcular" onclick="iniciarCronometro()">Iniciar Cronômetro</button><br><br>
+
+  <div id="tempoViagem"></div>
+</form>
+
+<div id="resultado"></div>
+
+<script>
+let startTime; // Variável para armazenar o tempo de início do cronômetro
+let isRunning = false; // Variável para controlar se o cronômetro está em execução
+
+function iniciarCronometro() {
+  if (!isRunning) {
+    startTime = new Date().getTime();
+    document.getElementById("botaoCalcular").innerHTML = "Parar Cronômetro";
+    isRunning = true;
+    atualizarTempo();
+  } else {
+    const endTime = new Date().getTime();
+    const tempoViagemSegundos = (endTime - startTime) / 1000; // Convertendo para segundos
+    const tempoViagemMinutos = tempoViagemSegundos / 60; // Convertendo para minutos
+    document.getElementById("tempoViagem").innerHTML = "Tempo da viagem: " + tempoViagemMinutos.toFixed(2) + " minutos";
+    const valorViagem = calcularValorViagem(tempoViagemMinutos);
+    document.getElementById("resultado").innerHTML = "Valor da viagem: R$" + valorViagem.toFixed(2);
+    document.getElementById("botaoCalcular").innerHTML = "Iniciar Cronômetro";
+    isRunning = false;
+  }
+}
+
+function atualizarTempo() {
+  if (isRunning) {
+    const currentTime = new Date().getTime();
+    const tempoDecorrido = (currentTime - startTime) / 1000; // Convertendo para segundos
+    document.getElementById("tempoViagem").innerHTML = "Tempo da viagem: " + (tempoDecorrido / 60).toFixed(2) + " minutos";
+    setTimeout(atualizarTempo, 100); // Atualiza o tempo a cada 100 milissegundos
+  }
+}
+
+function calcularValorViagem(tempoViagem) {
+  const taxaPorMinuto = 0.5; // Taxa por minuto
+  const valorViagem = tempoViagem * taxaPorMinuto;
+  return valorViagem + 10;
+}
+</script>
 
 </body>
 </html>
