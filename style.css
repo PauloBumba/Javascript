@@ -22,7 +22,7 @@
 }
 @media screen and (orientation : portrait){
   html,body{
-    background-image: url(../imagens/cev-portrait.jpg);
+    background-image: url(../Javascript/imagens/cev-portrait.jpg);
    
     background-size: cover;
    background-position: center bottom;
@@ -33,7 +33,7 @@
 }
 @media screen and (orientation : landscape){
     html,body{
-        background-image: url(../imagens/cev-landscape.jpg);
+        background-image: url(../Javascript/imagens/cev-landscape.jpg);
       
         background-size: cover;
        background-position: left bottom;
